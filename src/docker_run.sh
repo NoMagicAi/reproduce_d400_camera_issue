@@ -22,7 +22,7 @@ docker run \
 	-e EXP_CAM_2 \
 	-e EXP_CAM_3 \
 	-e EXP_CAM_4 \
-	-v $(pwd)/4_cameras.launch:/code/src/realsense2_camera/launch/4_cameras.launch \
+	-v $(pwd)/4_cameras.launch:/code/src/realsense-ros/realsense2_camera/launch/4_cameras.launch \
 	-v $(pwd)/4_cameras.sh:/code/4_cameras.sh \
 	nomagic-realsense-ros-base \
 	$@
