@@ -1,0 +1,5 @@
+# Ignore experiment log files
+*.log
+
+# Ignore IDE files
+*.idea/
