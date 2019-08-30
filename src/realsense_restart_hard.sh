@@ -22,5 +22,5 @@ rs-enumerate-devices | grep Serial
 
 sudo hwclock -w && \
 sudo bash -c "echo 0 > /sys/class/rtc/rtc0/wakealarm" && \
-sudo bash -c "echo `date +%s -d + 3 minutes` > /sys/class/rtc/rtc0/wakealarm" && \
+sudo bash -c "echo `date '+%s' -d '+ 3 minutes'` > /sys/class/rtc/rtc0/wakealarm" && \
 sudo shutdown 0
