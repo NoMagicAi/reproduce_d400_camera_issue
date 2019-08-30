@@ -15,13 +15,10 @@
 # limitations under the License.
 
 echo "=== realsense-restart-hard ==="
-
-restarts_log_file="/home/marvin/pwalczykk/_restart.log"
-echo "===========================" >> $restarts_log_file
-echo $(date) >> $restarts_log_file
-echo "HARD Realsense restart scheduled" >> $restarts_log_file
-echo "Available Realsense cameras:" >> $restarts_log_file
-rs-enumerate-devices | grep Serial >> $restarts_log_file
+echo $(date)
+echo "HARD Realsense restart scheduled"
+echo "Available Realsense cameras:"
+rs-enumerate-devices | grep Serial
 
 sudo hwclock -w && \
 sudo bash -c "echo 0 > /sys/class/rtc/rtc0/wakealarm" && \

@@ -15,14 +15,8 @@
 # limitations under the License.
 
 echo "=== realsense-restart-xhci ==="
-
-restarts_log_file="/home/marvin/pwalczykk/_restart.log"
-echo "===========================" >> $restarts_log_file
-echo $(date) >> $restarts_log_file
-echo "XHCI Realsense restart scheduled" >> $restarts_log_file
-echo "Available Realsense cameras:" >> $restarts_log_file
-rs-enumerate-devices | grep Serial >> $restarts_log_file
-
+echo $(date)
+echo "XHCI Realsense restart scheduled"
 echo "Available Realsense cameras:"
 rs-enumerate-devices | grep Serial
 
@@ -44,6 +38,3 @@ done
 sleep 1
 echo "XHCI restart finished. Available Realsense cameras:"
 rs-enumerate-devices | grep Serial
-
-echo "XHCI restart finished. Available Realsense cameras:" >> $restarts_log_file
-rs-enumerate-devices | grep Serial >> $restarts_log_file
