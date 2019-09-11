@@ -30,11 +30,7 @@
 start_date=$(date +%Y%m%d-%H%M%S)
 log_experiment='results/'$start_date'_experiment.log'
 log_realsense='results/'$start_date'_realsense.log'
-log_fw_logger='results/'$start_date'_fw_logger.log'
 server_test_path='tmp/realsense_test_'$start_date
-
-# Trap that will terminate rs-fw-logger at the end of the attempt
-trap "ssh $EXP_HOST 'killall rs-fw-logger' >> $log_fw_logger" EXIT
 
 # Copy source files of experiment to experiment host machine
 echo "Copying sources to experiment's server"
@@ -78,13 +74,6 @@ do
             exit
         fi
     fi
-
-    # TODO This is not needed every attempt, but must happen after hard reset... It was the easiest to do it always.
-    # Restart rs-fw-logger process, that is used to record firmware logs from Realsense camera
-	echo "Restarting rs-fw-logger"
-    ssh $EXP_HOST 'killall rs-fw-logger' >> $log_fw_logger
-    ssh $EXP_HOST 'rs-fw-logger' >> $log_fw_logger &
-    sleep 5
 
     # Remove all running and existing containers on experiment host machine
 	echo "Removing existing docker containers"
