@@ -14,17 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-docker run \
-	--rm \
-	--privileged \
-	--network=host \
-	-e EXP_CAM_1 \
-	-e EXP_CAM_2 \
-	-e EXP_CAM_3 \
-	-e EXP_CAM_4 \
-	-v $(pwd)/1_cameras.launch:/code/src/realsense-ros/realsense2_camera/launch/1_cameras.launch \
-	-v $(pwd)/1_cameras.sh:/code/1_cameras.sh \
-	-v $(pwd)/4_cameras.launch:/code/src/realsense-ros/realsense2_camera/launch/4_cameras.launch \
-	-v $(pwd)/4_cameras.sh:/code/4_cameras.sh \
-	nomagic-realsense-ros-base \
-	$@
+source /code/devel/setup.bash
+
+echo "Launching camera 1: $EXP_CAM_1"
+
+roslaunch realsense2_camera 1_cameras.launch \
+serial_no_camera1:=$EXP_CAM_1 \

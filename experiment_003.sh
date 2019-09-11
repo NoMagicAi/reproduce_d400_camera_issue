@@ -20,9 +20,6 @@
 [ -z "$EXP_ON_FILE" ] && echo "Assuming no file to stop experiment."
 
 [ -z "$EXP_CAM_1" ] && echo "Missing env: EXP_CAM_1" && exit
-[ -z "$EXP_CAM_2" ] && echo "Missing env: EXP_CAM_2" && exit
-[ -z "$EXP_CAM_3" ] && echo "Missing env: EXP_CAM_3" && exit
-[ -z "$EXP_CAM_4" ] && echo "Missing env: EXP_CAM_4" && exit
 
 [ -z "$EXP_CAMERAS_NUMBER" ] && echo "Missing env: EXP_CAMERAS_NUMBER" && exit
 
@@ -83,10 +80,8 @@ do
 	echo "Starting cameras"
 	ssh $EXP_HOST "cd $server_test_path && \
 	EXP_CAM_1=$EXP_CAM_1 \
-	EXP_CAM_2=$EXP_CAM_2 \
-	EXP_CAM_3=$EXP_CAM_3 \
-	EXP_CAM_4=$EXP_CAM_4 \
-	./docker_run.sh ./4_cameras.sh" >> $log_realsense 2>> $log_realsense &
+	./docker_run.sh ./1_cameras.sh" >> $log_realsense 2>> $log_realsense &
+    sleep 20
 
     # If some cameras are missing, apply XHCI reset. If this does not help, apply HARD reset.
 	echo "Checking if some camera is missing"
