@@ -16,6 +16,7 @@
 
 docker run \
 	--rm \
+	--name roe \
 	--privileged \
 	--network=host \
 	-e ROS_IP \

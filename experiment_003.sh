@@ -86,7 +86,7 @@ do
     # If some cameras are missing, apply XHCI reset. If this does not help, apply HARD reset.
 	echo "Checking if some camera is missing"
 
-    while (( $(ssh $EXP_HOST "(rs-enumerate-devices | grep Serial | wc -l)") == $EXP_CAMERAS_NUMBER ))
+    while (( $(ssh $EXP_HOST "(docker exec -it roe rs-enumerate-devices | grep Serial | wc -l)") == $EXP_CAMERAS_NUMBER ))
     do
         echo "Attempt $i; Date: $(date); All cameras OK" >> $log_experiment
         sleep 5
