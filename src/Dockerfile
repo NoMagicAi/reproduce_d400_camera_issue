@@ -1,4 +1,5 @@
-from ros:kinetic-ros-base
+# ros-kinetic-base compilation for linux armv7
+from ros@sha256:daa866442ee63b4e3ea1105fada27baa4281f35c584bd6e88e328d78837c45c8
 
 # Copyright 2019 NoMagic Sp. z o.o.
 #
