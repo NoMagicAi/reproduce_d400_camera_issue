@@ -28,5 +28,5 @@ docker run \
 	-v $(pwd)/1_cameras.sh:/code/1_cameras.sh \
 	-v $(pwd)/4_cameras.launch:/code/src/realsense-ros/realsense2_camera/launch/4_cameras.launch \
 	-v $(pwd)/4_cameras.sh:/code/4_cameras.sh \
-	nomagic-realsense-ros-base-armv7 \
+	nomagic-realsense-ros-base-aarch64 \
 	$@
