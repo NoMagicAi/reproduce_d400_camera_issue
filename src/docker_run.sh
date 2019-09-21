@@ -18,6 +18,8 @@ docker run \
 	--rm \
 	--privileged \
 	--network=host \
+	-e ROS_IP \
+	-e ROS_MASTER_URI \
 	-e EXP_CAM_1 \
 	-e EXP_CAM_2 \
 	-e EXP_CAM_3 \
