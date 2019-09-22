@@ -15,6 +15,7 @@
 # limitations under the License.
 
 docker run \
+    --name roe \
 	--rm \
 	--privileged \
 	--network=host \
