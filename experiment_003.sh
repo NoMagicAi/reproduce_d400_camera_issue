@@ -83,19 +83,21 @@ do
 	./docker_run.sh ./1_cameras.sh" >> $log_realsense 2>> $log_realsense &
     sleep 20
 
-    # If some cameras are missing, apply XHCI reset. If this does not help, apply HARD reset.
-	echo "Checking if some camera is missing"
+    # If image is not published, apply reboot.
+	echo "Checking if message is being published"
 
-    while (( $(ssh $EXP_HOST docker exec roe rs-enumerate-devices | grep Serial | wc -l) == $EXP_CAMERAS_NUMBER ))
+    while (( $(ssh $EXP_HOST timeout 3 docker exec roe \
+             '/bin/bash -c "source /opt/ros/kinetic/setup.bash && rostopic echo /camera1/depth/image_rect_raw -n 1 --noarr"  \
+             | grep data: | wc -l') == $EXP_CAMERAS_NUMBER ))
     do
         echo "Attempt $i; Date: $(date); All cameras OK" >> $log_experiment
         sleep 5
             # Check if the file allowing to continue the experiment exists
         if [ -z "$EXP_ON_FILE" ]; then
-            echo "No file to stop experiment defined. Continuing experiment."
+            echo "Everything OK, Continuing experiment."
         else
             if [ -f "$EXP_ON_FILE" ]; then
-                echo "File $EXP_ON_FILE found! Continuing experiment."
+                echo "Everything OK, Continuing experiment."
             else
                 echo "File $EXP_ON_FILE not found! Stopping experiment."
                 echo "File $EXP_ON_FILE not found! Stopping experiment." >> $log_experiment
@@ -107,6 +109,6 @@ do
 
     echo "Attempt $i; Date: $(date); Broken camera detected" >> $log_experiment
 
-	ssh $EXP_HOST "cd $server_test_path && ./realsense_restart_hard.sh" >> $log_experiment 2>> $log_experiment
+	ssh $EXP_HOST "sudo reboot 0" >> $log_experiment 2>> $log_experiment
 
 done
